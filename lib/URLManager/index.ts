@@ -50,7 +50,6 @@ export class URLManager extends URLManagerTools {
         const newJson = { [key]: value }
         let componentJson = this.getJSONFromComponent(this.hash) //get previous component json
         componentJson = { ...componentJson, ...newJson }
-        console.log(componentJson)
         const url = new URL(window.location.href);
         url.searchParams.set(this.hash, URLManager.getEncodedStrFromJSON(componentJson));
         if (addToHistoric) {
