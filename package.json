@@ -25,13 +25,14 @@
   "dependencies": {
     "events": "^3.3.0",
     "object-hash": "^3.0.0",
-    "query-string": "^9.3.1"
+    "query-string": "^5.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@release-it/keep-a-changelog": "^7.0.1",
     "@types/events": "^3.0.3",
     "@types/object-hash": "^3.0.6",
+    "@types/query-string": "^6.2.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
