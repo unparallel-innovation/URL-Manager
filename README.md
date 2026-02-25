@@ -22,5 +22,16 @@ urlManager.getKeyFromComponent<T = any>(key: string): T | undefined
 ```
 Obtains the JSON associated with a key
 
+ ```typescript
+urlManager.deleteKey(key: string, addToHistoric?: boolean)
+```
+Deletes a key from the JSON encoded in the url, if all the keys are removed the paremeters will be removed from the URL
+
+ ```typescript
+urlManager.deleteAllKeys(addToHistoric?: boolean)
+```
+Delete all the keys from the JSON encoded in the url, this will remove the parameter from the URL as well
+
+
 ## Example
 A React Component with an example is available in "/src/App.tsx" on this repository

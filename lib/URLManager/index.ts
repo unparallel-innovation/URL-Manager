@@ -50,14 +50,28 @@ export class URLManager extends URLManagerTools {
         const newJson = { [key]: value }
         let componentJson = this.getJSONFromComponent(this.hash) //get previous component json
         componentJson = { ...componentJson, ...newJson }
+        this.setQueryParameter(componentJson, addToHistoric)
+    }
+
+    deleteKey(key: string, addToHistoric?: boolean) {
+        const componentJson = this.getJSONFromComponent(this.hash) //get previous component json
+        delete componentJson[key]
+        this.setQueryParameter(Object.keys(componentJson).length === 0 ? null : componentJson, addToHistoric)
+    }
+
+    deleteAllKeys(addToHistoric?: boolean) {
+        this.setQueryParameter(null, addToHistoric)
+    }
+
+    setQueryParameter(value: any, addToHistoric?: boolean) {
         const url = new URL(window.location.href);
-        url.searchParams.set(this.hash, URLManager.getEncodedStrFromJSON(componentJson));
+        if (value === null) url.searchParams.delete(this.hash)
+        else url.searchParams.set(this.hash, URLManager.getEncodedStrFromJSON(value));
         if (addToHistoric) {
             window.history.pushState({}, "", url)
         } else {
             window.history.pushState({}, "", url)
         }
-
     }
 
     getKeyFromComponent<T = any>(key: string): T | undefined {
