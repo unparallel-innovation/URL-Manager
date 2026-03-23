@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- Allow URLManager on the server side by specifying a "search" parameter on the following methods "getKeyFromComponent", "getJSONFromComponent"
 
 ## [0.2.0] - 2026-03-23
 - Using string instead of using an object when computing the hash for the url manager key

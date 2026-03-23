@@ -78,22 +78,29 @@ export class URLManager extends URLManagerTools {
         }
     }
 
-    getKeyFromComponent<T = any>(key: string): T | undefined {
-        if (window.location) {
-            const query = QueryString.parse(window.location.search)
-            const result = query[this.hash]
-            if (typeof result === "string") {
-                const json = URLManager.getJSONFromEncodedStr(result)
-                return json[key]
-            }
+
+    getSearch(search: string | undefined): string {
+        if (typeof search === "string") return search
+        if (typeof window === "undefined") {
+            throw '"window" object not defined, when using this library in the server side "search" parameter must be defined'
+        }
+        return window.location.search
+    }
+
+
+    getKeyFromComponent<T = any>(key: string, search?: string): T | undefined {
+
+        const query = QueryString.parse(this.getSearch(search))
+        const result = query[this.hash]
+        if (typeof result === "string") {
+            const json = URLManager.getJSONFromEncodedStr(result)
+            return json[key]
         }
     }
 
-    getJSONFromComponent(hash: string) {
-        if (window.location) {
-            const result = URLManager.getJSONFromHash(hash, window.location.search)
-            return result
-        }
+    getJSONFromComponent(hash: string, search?: string) {
+        const result = URLManager.getJSONFromHash(hash, this.getSearch(search))
+        return result
     }
 
 
