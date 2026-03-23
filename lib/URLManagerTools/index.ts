@@ -65,10 +65,10 @@ export class URLManagerTools {
         return encodeURIComponent(strObj)
     }
 
-    static generateHash(id: string, hashChain?: StringHM) {
+    static generateHash(id: string, hashChain?: StringHM, useObjectToComputeHash?: boolean) {
         const hashLength = 6
         const obj = { id, ...hashChain }
-        let hash = ObjectHash(obj)
+        let hash = ObjectHash(useObjectToComputeHash ? obj : JSON.stringify(obj))
         hash = hash.substring(0, hashLength)
         return hash
     }

@@ -5,7 +5,7 @@ import { URLManager } from "../lib/URLManager"
 
 
 function App() {
-  const urlManager = useMemo<URLManager>(() => new URLManager({ id: "test" }), [])
+  const urlManager = useMemo<URLManager>(() => new URLManager({ id: "index", useObjectToComputeHash: false }), [])
   const [count, _setCount] = useState<number>(urlManager.getKeyFromComponent("count") || 0)
   const [count2, _setCount2] = useState<number>(urlManager.getKeyFromComponent("count2") || 0)
 

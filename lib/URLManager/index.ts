@@ -5,7 +5,8 @@ import { URLManagerTools, StringHM } from '../URLManagerTools';
 export interface URLManagerProps {
     id: string,
     hashChain?: StringHM
-    urlManagerComponentId?: string
+    urlManagerComponentId?: string,
+    useObjectToComputeHash?: boolean
 }
 
 
@@ -18,14 +19,17 @@ export class URLManager extends URLManagerTools {
     hash: string
     events: EventEmitter
     urlManagerComponentId: string | undefined
+    useObjectToComputeHash: boolean
     constructor(props: URLManagerProps, disableUrlManager?: boolean) {
         super()
         this.id = props.id
         this.disableUrlManager = !!disableUrlManager
         this.hashLength = 6
-        this.hash = URLManager.generateHash(this.id, props.hashChain)
+        this.useObjectToComputeHash = !!props.useObjectToComputeHash
+        this.hash = URLManager.generateHash(this.id, props.hashChain, this.useObjectToComputeHash)
         this.events = new EventEmitter()
         this.urlManagerComponentId = props.urlManagerComponentId
+
     }
 
 
@@ -35,7 +39,7 @@ export class URLManager extends URLManagerTools {
     setNewHashChain(hashChain: StringHM) {
 
         const prevHash = this.hash
-        this.hash = URLManager.generateHash(this.id, hashChain)
+        this.hash = URLManager.generateHash(this.id, hashChain, this.useObjectToComputeHash)
         if (prevHash != this.hash) {
             this.events.emit("hashChange", this.hash)
         }
